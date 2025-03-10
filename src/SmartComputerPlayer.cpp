@@ -1,23 +1,8 @@
 #include "ComputerPlayer.h"
 
-// ----------------------------
-// RandomComputerPlayer Implementation
-// ----------------------------
-RandomComputerPlayer::RandomComputerPlayer() {
-    std::srand(std::time(0)); // Initialize random seed
-}
-
-Choice RandomComputerPlayer::choose() {
-    return static_cast<Choice>(std::rand() % 3); // Random number between 0 and 2
-}
-
-// ----------------------------
-// SmartComputerPlayer Implementation
-// ----------------------------
-
-// Constructor for Smart Strategy
+// Constructor initializes seed for randomness
 SmartComputerPlayer::SmartComputerPlayer() {
-    std::srand(std::time(0)); // Initialize random seed
+    std::srand(std::time(0));
 }
 
 // Function to record human's past moves
@@ -25,7 +10,7 @@ void SmartComputerPlayer::recordHumanMove(Choice humanChoice) {
     history.push_back(humanChoice);
 }
 
-// Function to predict the next move based on human history
+// Function to predict the next move based on history
 Choice SmartComputerPlayer::predictNextMove() {
     if (history.empty()) {
         return static_cast<Choice>(std::rand() % 3); // No history → Pick randomly

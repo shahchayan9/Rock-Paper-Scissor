@@ -1,61 +1,82 @@
 #include "GameEngine.h"
-#include "ComputerPlayer.h"
-#include "SmartComputerPlayer.h"
 #include <iostream>
+#include <iomanip>
 #include <map>
 
 using namespace std;
 
-GameEngine::GameEngine(Player *humanPlayer, Player *computerPlayer) {
-    human = humanPlayer;
-    computer = computerPlayer;
+GameEngine::GameEngine(Player *human, Player *computer) {
+    this->human = human;
+    this->computer = computer;
     humanWins = computerWins = ties = 0;
+    
+    SmartComputerPlayer* smartAI = dynamic_cast<SmartComputerPlayer*>(computer);
+    if (smartAI) {
+        smartAI->load_frequencies();
+    }
 }
 
-// Function to convert Choice enum to a readable string
-string choiceToString(Choice choice) {
+string GameEngine::choice_to_string(Choice choice) {
     map<Choice, string> choiceMap = {
         {ROCK, "ROCK"},
         {PAPER, "PAPER"},
         {SCISSORS, "SCISSORS"}
     };
-    return choiceMap[choice];
+
+    return choiceMap.at(choice);
 }
 
-// Function to play a single round
-void GameEngine::playRound() {
+void GameEngine::play_round() {
     Choice humanChoice = human->choose();
     Choice computerChoice = computer->choose();
 
-    cout << "Human chose: " << choiceToString(humanChoice)
-              << " | Computer chose: " << choiceToString(computerChoice) << endl;
+    cout << "  Human chose " << choice_to_string(humanChoice) << endl;
+    cout << "  Computer chose " << choice_to_string(computerChoice) << endl;
 
-    // Determine round winner
+    string winner;
+
     if (humanChoice == computerChoice) {
-        cout << "It's a tie!\n";
+        winner = "TIE";
         ties++;
-    }
-    else if ((humanChoice == ROCK && computerChoice == SCISSORS) ||
+    } else if ((humanChoice == ROCK && computerChoice == SCISSORS) ||
              (humanChoice == PAPER && computerChoice == ROCK) ||
              (humanChoice == SCISSORS && computerChoice == PAPER)) {
-        cout << "Human wins this round!\n";
+        winner = "HUMAN";
         humanWins++;
     } else {
-        cout << "Computer wins this round!\n";
+        winner = "COMPUTER";
         computerWins++;
     }
 
-    // If the computer is using Smart Strategy, update its history
-    computer -> recordHumanMove(humanChoice);
+    cout << "  The winner is: " << winner << endl << endl;
+
+    SmartComputerPlayer* smartAI = dynamic_cast<SmartComputerPlayer*>(computer);
+    if (smartAI) {
+        smartAI->record_move(humanChoice);
+    }
 }
 
-// Function to display final match results
-void GameEngine::displayResults() {
-    cout << "\n====================\n";
-    cout << "     Match Stats     \n";
-    cout << "====================\n";
-    cout << "Human Wins   : " << humanWins << " (" << (humanWins * 100) / (humanWins + computerWins + ties) << "%)\n";
-    cout << "Computer Wins: " << computerWins << " (" << (computerWins * 100) / (humanWins + computerWins + ties) << "%)\n";
-    cout << "Ties         : " << ties << " (" << (ties * 100) / (humanWins + computerWins + ties) << "%)\n";
-    cout << "====================\n";
+void GameEngine::display_results() {
+    int totalGames = humanWins + computerWins + ties;
+
+    std::cout << "\nMatch stats\n";
+    std::cout << "-----------\n";
+
+    std::cout << "   Human wins: " << std::setw(4) << humanWins 
+              << "   " << std::setw(3) << (humanWins * 100) / totalGames << "%\n";
+    
+    std::cout << "Computer wins: " << std::setw(4) << computerWins 
+              << "   " << std::setw(3) << (computerWins * 100) / totalGames << "%\n";
+
+    std::cout << "         Ties: " << std::setw(4) << ties 
+              << "   " << std::setw(3) << (ties * 100) / totalGames << "%\n";
+}
+
+GameEngine::~GameEngine() {
+    SmartComputerPlayer* smartAI = dynamic_cast<SmartComputerPlayer*>(computer);
+    if (smartAI) {
+        smartAI->save_frequencies();
+    }
+
+    delete computer;
 }

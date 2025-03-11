@@ -4,7 +4,7 @@ using namespace std;
 
 Choice HumanPlayer::choose() {
     char choice;
-    cout << "Enter your choice (r = Rock, p = Paper, s = Scissors): ";
+    cout << "Human's Choice? ";
     cin >> choice;
 
     switch (choice) {

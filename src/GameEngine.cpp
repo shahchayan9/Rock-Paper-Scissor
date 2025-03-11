@@ -1,5 +1,6 @@
 #include "GameEngine.h"
-#include "ComputerPlayer.h"  // Needed for SmartComputerPlayer
+#include "ComputerPlayer.h"
+#include "SmartComputerPlayer.h"
 #include <iostream>
 #include <map>
 

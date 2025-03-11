@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
+#include "SmartComputerPlayer.h"
 #include <iostream>
 
 int main() {

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <map>
 
+using namespace std;
+
 GameEngine::GameEngine(Player *humanPlayer, Player *computerPlayer) {
     human = humanPlayer;
     computer = computerPlayer;
@@ -11,8 +13,8 @@ GameEngine::GameEngine(Player *humanPlayer, Player *computerPlayer) {
 }
 
 // Function to convert Choice enum to a readable string
-std::string choiceToString(Choice choice) {
-    std::map<Choice, std::string> choiceMap = {
+string choiceToString(Choice choice) {
+    map<Choice, string> choiceMap = {
         {ROCK, "ROCK"},
         {PAPER, "PAPER"},
         {SCISSORS, "SCISSORS"}
@@ -25,21 +27,21 @@ void GameEngine::playRound() {
     Choice humanChoice = human->choose();
     Choice computerChoice = computer->choose();
 
-    std::cout << "Human chose: " << choiceToString(humanChoice)
-              << " | Computer chose: " << choiceToString(computerChoice) << std::endl;
+    cout << "Human chose: " << choiceToString(humanChoice)
+              << " | Computer chose: " << choiceToString(computerChoice) << endl;
 
     // Determine round winner
     if (humanChoice == computerChoice) {
-        std::cout << "It's a tie!\n";
+        cout << "It's a tie!\n";
         ties++;
     }
     else if ((humanChoice == ROCK && computerChoice == SCISSORS) ||
              (humanChoice == PAPER && computerChoice == ROCK) ||
              (humanChoice == SCISSORS && computerChoice == PAPER)) {
-        std::cout << "Human wins this round!\n";
+        cout << "Human wins this round!\n";
         humanWins++;
     } else {
-        std::cout << "Computer wins this round!\n";
+        cout << "Computer wins this round!\n";
         computerWins++;
     }
 
@@ -52,11 +54,11 @@ void GameEngine::playRound() {
 
 // Function to display final match results
 void GameEngine::displayResults() {
-    std::cout << "\n====================\n";
-    std::cout << "     Match Stats     \n";
-    std::cout << "====================\n";
-    std::cout << "Human Wins   : " << humanWins << " (" << (humanWins * 100) / (humanWins + computerWins + ties) << "%)\n";
-    std::cout << "Computer Wins: " << computerWins << " (" << (computerWins * 100) / (humanWins + computerWins + ties) << "%)\n";
-    std::cout << "Ties         : " << ties << " (" << (ties * 100) / (humanWins + computerWins + ties) << "%)\n";
-    std::cout << "====================\n";
+    cout << "\n====================\n";
+    cout << "     Match Stats     \n";
+    cout << "====================\n";
+    cout << "Human Wins   : " << humanWins << " (" << (humanWins * 100) / (humanWins + computerWins + ties) << "%)\n";
+    cout << "Computer Wins: " << computerWins << " (" << (computerWins * 100) / (humanWins + computerWins + ties) << "%)\n";
+    cout << "Ties         : " << ties << " (" << (ties * 100) / (humanWins + computerWins + ties) << "%)\n";
+    cout << "====================\n";
 }

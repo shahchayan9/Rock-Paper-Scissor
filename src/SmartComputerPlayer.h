@@ -30,7 +30,7 @@ class SmartComputerPlayer : public Player {
     public:
         SmartComputerPlayer();
         Choice choose() override;
-        void recordHumanMove(Choice humanChoice); // Store move history
+        void recordHumanMove(Choice humanChoice) override; // Store move history
         void saveFrequencies(); // Saves move frequency data to file
 };
 

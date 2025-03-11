@@ -7,6 +7,7 @@ class Player {
 public:
     virtual Choice choose() = 0; // Pure virtual function
     virtual ~Player() {} // Virtual destructor
+    virtual void recordHumanMove(Choice) {}
 };
 
 #endif

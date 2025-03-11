@@ -46,10 +46,7 @@ void GameEngine::playRound() {
     }
 
     // If the computer is using Smart Strategy, update its history
-    SmartComputerPlayer* smartComp = dynamic_cast<SmartComputerPlayer*>(computer);
-    if (smartComp) {
-        smartComp->recordHumanMove(humanChoice);
-    }
+    computer -> recordHumanMove(humanChoice);
 }
 
 // Function to display final match results

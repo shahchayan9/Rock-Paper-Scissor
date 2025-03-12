@@ -1,18 +1,28 @@
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
-#include "Player.h"
+#include "HumanPlayer.h"
+#include "ComputerPlayer.h"
+#include "RandomComputerPlayer.h"
+#include "SmartComputerPlayer.h"
+#include <string>
+
+using namespace std;
 
 class GameEngine {
 private:
-    int humanWins, computerWins, ties;
+    int humanWins;
+    int computerWins;
+    int ties;
     Player *human;
-    Player *computer;
-
+    ComputerPlayer *computer;
+    string choice_to_string(Choice choice);
+    
 public:
-    GameEngine(Player *humanPlayer, Player *computerPlayer);
-    void playRound();
-    void displayResults();
+    GameEngine(HumanPlayer *human, ComputerPlayer *computer);
+    void play_round();
+    void display_results();
+    ~GameEngine();
 };
 
 #endif

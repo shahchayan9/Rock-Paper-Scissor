@@ -5,8 +5,8 @@ enum Choice { ROCK, PAPER, SCISSORS };
 
 class Player {
 public:
-    virtual Choice choose() = 0; // Pure virtual function
-    virtual ~Player() {} // Virtual destructor
+    virtual Choice choose() = 0;
+    virtual ~Player() {}
 };
 
 #endif

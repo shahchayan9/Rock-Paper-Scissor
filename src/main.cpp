@@ -1,33 +1,30 @@
-#include "GameEngine.h"
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
+#include "ComputerPlayerFactory.h"
+#include "GameEngine.h"
 #include <iostream>
+
+using namespace std;
 
 int main() {
     HumanPlayer human;
-    Player* computer; // Pointer to use either strategy
+    ComputerPlayer* computer;
 
     char strategyChoice;
-    std::cout << "Choose computer strategy: (r = Random, s = Smart): ";
-    std::cin >> strategyChoice;
+    cout << "Choose computer strategy: (r = Random, s = Smart): ";
+    cin >> strategyChoice;
 
-    if (strategyChoice == 's') {
-        computer = new SmartComputerPlayer();
-        std::cout << "Smart strategy selected!\n";
-    } else {
-        computer = new RandomComputerPlayer();
-        std::cout << "Random strategy selected!\n";
-    }
+    computer = ComputerPlayerFactory::select_computer_player(strategyChoice);
 
     GameEngine engine(&human, computer);
 
-    int rounds = 20; // Play 20 rounds
+    int rounds = 20;
     for (int i = 0; i < rounds; i++) {
-        std::cout << "Round " << (i + 1) << ":\n";
-        engine.playRound();
+        cout << "Round " << (i + 1) << "\n";
+        engine.play_round();
     }
 
-    engine.displayResults();
-    delete computer; // Free memory
+    engine.display_results();
+
     return 0;
 }

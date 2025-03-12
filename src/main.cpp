@@ -1,15 +1,14 @@
-#include "GameEngine.h"
 #include "HumanPlayer.h"
+#include "ComputerPlayer.h"
 #include "ComputerPlayerFactory.h"
-#include "RandomComputerPlayer.h"
-//#include "SmartComputerPlayer.h"
+#include "GameEngine.h"
 #include <iostream>
 
 using namespace std;
 
 int main() {
     HumanPlayer human;
-    Player* computer;
+    ComputerPlayer* computer;
 
     char strategyChoice;
     cout << "Choose computer strategy: (r = Random, s = Smart): ";

@@ -1,13 +1,13 @@
 #ifndef RANDOMCOMPUTERPLAYER_H
 #define RANDOMCOMPUTERPLAYER_H
 
-#include "Player.h"
+#include "ComputerPlayer.h"
 #include <vector>
 #include <unordered_map>
 #include <cstdlib>
 #include <ctime>
 
-class RandomComputerPlayer : public Player {
+class RandomComputerPlayer : public ComputerPlayer {
 public:
     RandomComputerPlayer();
     Choice choose() override;

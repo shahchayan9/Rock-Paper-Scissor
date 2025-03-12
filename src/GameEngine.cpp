@@ -5,15 +5,12 @@
 
 using namespace std;
 
-GameEngine::GameEngine(Player *human, Player *computer) {
+GameEngine::GameEngine(HumanPlayer *human, ComputerPlayer *computer) {
     this->human = human;
     this->computer = computer;
     humanWins = computerWins = ties = 0;
     
-    SmartComputerPlayer* smartAI = dynamic_cast<SmartComputerPlayer*>(computer);
-    if (smartAI) {
-        smartAI->load_frequencies();
-    }
+    computer->load_frequencies();
 }
 
 string GameEngine::choice_to_string(Choice choice) {
@@ -50,10 +47,7 @@ void GameEngine::play_round() {
 
     cout << "  The winner is: " << winner << endl << endl;
 
-    SmartComputerPlayer* smartAI = dynamic_cast<SmartComputerPlayer*>(computer);
-    if (smartAI) {
-        smartAI->record_move(humanChoice);
-    }
+    computer->record_move(humanChoice);
 }
 
 void GameEngine::display_results() {
@@ -73,10 +67,6 @@ void GameEngine::display_results() {
 }
 
 GameEngine::~GameEngine() {
-    SmartComputerPlayer* smartAI = dynamic_cast<SmartComputerPlayer*>(computer);
-    if (smartAI) {
-        smartAI->save_frequencies();
-    }
-
+    computer->save_frequencies();
     delete computer;
 }

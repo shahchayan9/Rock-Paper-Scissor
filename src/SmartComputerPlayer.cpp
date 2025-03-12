@@ -84,7 +84,7 @@ Choice SmartComputerPlayer::choose() {
 }
 
 void SmartComputerPlayer::load_frequencies() {
-    ifstream file("user_choice_history.txt");
+    ifstream file("freq.txt");
     if (!file)
         return;
 
@@ -93,16 +93,20 @@ void SmartComputerPlayer::load_frequencies() {
     while (file >> seq >> freq) {
         sequence_frequencies[seq] = freq;
     }
+
+    cout << "Reading frequency file freq.txt: " << sequence_frequencies.size() << " records." << endl;
 }
 
 void SmartComputerPlayer::save_frequencies() {
-    ofstream file("user_choice_history.txt");
+    ofstream file("freq.txt");
     if (!file)
         return;
 
     for (auto& pair : sequence_frequencies) {
         file << pair.first << " " << pair.second << "\n";
     }
+
+    cout << "Writing frequency file freq.txt: " << sequence_frequencies.size() << " records." << endl;
 }
 
 void SmartComputerPlayer::record_move(Choice choice) {

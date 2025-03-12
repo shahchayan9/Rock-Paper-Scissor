@@ -6,7 +6,7 @@
 
 class ComputerPlayerFactory {
 public:
-    static Player* select_computer_player(char choice);
+    static ComputerPlayer* select_computer_player(char choice);
 };
 
 #endif

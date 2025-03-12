@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Player* ComputerPlayerFactory::select_computer_player(char choice) {
+ComputerPlayer* ComputerPlayerFactory::select_computer_player(char choice) {
     if (choice == 's') {
         cout << "Smart strategy selected!\n";
         return new SmartComputerPlayer();

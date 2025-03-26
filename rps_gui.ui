@@ -16,7 +16,7 @@
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -58,7 +58,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spin_box_num_of_rounds"/>
+         <widget class="QSpinBox" name="spin_box_num_of_rounds">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>20</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -74,7 +81,7 @@
     <item>
      <widget class="QLabel" name="label_current_round">
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h3 style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;Round #0&lt;/span&gt;&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h3 style=&quot;-qt-paragraph-type:empty; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:large; font-weight:700;&quot;&gt;&lt;br/&gt;&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
        <enum>Qt::TextFormat::MarkdownText</enum>
@@ -97,7 +104,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QLabel" name="label_human_choose">
+       <widget class="QLabel" name="label_choose">
         <property name="text">
          <string>Choose:</string>
         </property>
@@ -130,9 +137,9 @@
      </layout>
     </item>
     <item>
-     <widget class="QLabel" name="label_human_chooses">
+     <widget class="QLabel" name="label_human_choice">
       <property name="text">
-       <string>Human Chooses: </string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -150,19 +157,9 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_pred_human_choice">
-      <property name="text">
-       <string>Predicted Human Choice: </string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QLabel" name="label_computer_choice">
       <property name="text">
-       <string>Computer Choice: </string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -188,21 +185,21 @@
       <item>
        <widget class="QLabel" name="label_human_wins">
         <property name="text">
-         <string>Human Wins: 0</string>
+         <string>Human Wins: </string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_computer_wins">
         <property name="text">
-         <string>Computer Wins: 0</string>
+         <string>Computer Wins: </string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_ties">
         <property name="text">
-         <string>Ties: 0</string>
+         <string>Ties: </string>
         </property>
        </widget>
       </item>

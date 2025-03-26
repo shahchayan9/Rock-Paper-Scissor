@@ -5,12 +5,21 @@
 
 using namespace std;
 
-GameEngine::GameEngine(HumanPlayer *human, ComputerPlayer *computer) {
-    this->human = human;
-    this->computer = computer;
-    humanWins = computerWins = ties = 0;
-    
+GameEngine::GameEngine() {
+    this->human = new HumanPlayer();
+    this->computer = factory.select_computer_player("RANDOM");
+    human_wins = computer_wins = ties = 0;
     computer->load_frequencies();
+}
+
+Choice GameEngine::string_to_choice(string choice) {
+    map<string, Choice> choiceMap = {
+        {"ROCK", ROCK},
+        {"PAPER", PAPER},
+        {"SCISSORS", SCISSORS}
+    };
+
+    return choiceMap.at(choice);
 }
 
 string GameEngine::choice_to_string(Choice choice) {
@@ -23,47 +32,43 @@ string GameEngine::choice_to_string(Choice choice) {
     return choiceMap.at(choice);
 }
 
-void GameEngine::play_round() {
-    Choice humanChoice = human->choose();
-    Choice computerChoice = computer->choose();
-
-    cout << "  Human chose " << choice_to_string(humanChoice) << endl;
-    cout << "  Computer chose " << choice_to_string(computerChoice) << endl;
-
-    string winner;
-
-    if (humanChoice == computerChoice) {
-        winner = "TIE";
-        ties++;
-    } else if ((humanChoice == ROCK && computerChoice == SCISSORS) ||
-             (humanChoice == PAPER && computerChoice == ROCK) ||
-             (humanChoice == SCISSORS && computerChoice == PAPER)) {
-        winner = "HUMAN";
-        humanWins++;
-    } else {
-        winner = "COMPUTER";
-        computerWins++;
-    }
-
-    cout << "  The winner is: " << winner << endl << endl;
-
-    computer->record_move(humanChoice);
+void GameEngine::select_computer_player(string algo_type) {
+    this->computer = factory.select_computer_player(algo_type);
 }
 
-void GameEngine::display_results() {
-    int totalGames = humanWins + computerWins + ties;
+vector<string> GameEngine::play_round(string human_choice_string) {
+    Choice human_choice = string_to_choice(human_choice_string);
+    Choice computer_choice = computer->choose();
+    string winner;
 
-    std::cout << "\nMatch stats\n";
-    std::cout << "-----------\n";
+    if (human_choice == computer_choice) {
+        winner = "TIE";
+        ties++;
+    } else if ((human_choice == ROCK && computer_choice == SCISSORS) ||
+             (human_choice == PAPER && computer_choice == ROCK) ||
+             (human_choice == SCISSORS && computer_choice == PAPER)) {
+        winner = "HUMAN";
+        human_wins++;
+    } else {
+        winner = "COMPUTER";
+        computer_wins++;
+    }
 
-    std::cout << "   Human wins: " << std::setw(4) << humanWins 
-              << "   " << std::setw(3) << (humanWins * 100) / totalGames << "%\n";
-    
-    std::cout << "Computer wins: " << std::setw(4) << computerWins 
-              << "   " << std::setw(3) << (computerWins * 100) / totalGames << "%\n";
+    computer->record_move(human_choice);
 
-    std::cout << "         Ties: " << std::setw(4) << ties 
-              << "   " << std::setw(3) << (ties * 100) / totalGames << "%\n";
+    vector<string> result;
+    result.push_back(winner);
+    result.push_back(choice_to_string(computer_choice));
+
+    return result;
+}
+
+vector<int> GameEngine::get_stats() {
+    vector<int> stats;
+    stats.push_back(human_wins);
+    stats.push_back(computer_wins);
+    stats.push_back(ties);
+    return stats;
 }
 
 GameEngine::~GameEngine() {

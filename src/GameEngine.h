@@ -5,23 +5,28 @@
 #include "ComputerPlayer.h"
 #include "RandomComputerPlayer.h"
 #include "SmartComputerPlayer.h"
+#include "ComputerPlayerFactory.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
 class GameEngine {
 private:
-    int humanWins;
-    int computerWins;
+    ComputerPlayerFactory factory;
+    int human_wins;
+    int computer_wins;
     int ties;
     Player *human;
     ComputerPlayer *computer;
+    Choice string_to_choice(string choice);
     string choice_to_string(Choice choice);
     
 public:
-    GameEngine(HumanPlayer *human, ComputerPlayer *computer);
-    void play_round();
-    void display_results();
+    GameEngine();
+    vector<string> play_round(string human_choice_string);
+    void select_computer_player(string algo_type);
+    vector<int> get_stats();
     ~GameEngine();
 };
 

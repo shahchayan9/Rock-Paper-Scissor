@@ -1,9 +1,0 @@
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/rps-gui.dir
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/install.dir
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/rps-gui_autogen_timestamp_deps.dir
-C:/SJSU/Spring 2025/202 Software Systems Engineering/Qt/rps-gui/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/rps-gui_autogen.dir

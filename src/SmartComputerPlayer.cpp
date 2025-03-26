@@ -11,8 +11,6 @@ SmartComputerPlayer::SmartComputerPlayer() {
 
 Choice SmartComputerPlayer::predict_next_move() {
     if (last_n_choices.size() < N - 1) {
-        cout << "    Insufficient history to predict." << endl;
-        cout << "    Computer will choose randomly." << endl;
         return static_cast<Choice>(rand() % 3);
     }
 

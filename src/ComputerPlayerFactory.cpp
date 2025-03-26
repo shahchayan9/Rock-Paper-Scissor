@@ -1,14 +1,14 @@
-#include "ComputerPlayerFactory.h"
 #include <iostream>
+#include "ComputerPlayerFactory.h"
+#include "RandomComputerPlayer.h"
+#include "SmartComputerPlayer.h"
 
 using namespace std;
 
-ComputerPlayer* ComputerPlayerFactory::select_computer_player(char choice) {
-    if (choice == 's') {
-        cout << "Smart strategy selected!\n";
+ComputerPlayer* ComputerPlayerFactory::select_computer_player(string choice) {
+    if (choice == "SMART") {
         return new SmartComputerPlayer();
     } else {
-        cout << "Random strategy selected!\n";
         return new RandomComputerPlayer();
     }
 }

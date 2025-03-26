@@ -75,6 +75,7 @@ void rps_gui::play_round(string human_choice) {
         ui->spin_box_num_of_rounds->setEnabled(true);
         ui->push_button_start->setEnabled(true);
         ui->label_current_round->setText("");
+        game_engine->save_frequencies();
     }
 
     update_stats();

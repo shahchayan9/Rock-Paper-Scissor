@@ -20,7 +20,7 @@ Choice SmartComputerPlayer::predict_next_move() {
     for (auto& pair : sequence_frequencies) {
         if (pair.first.substr(0, N - 1) == partialSeq) {
             Choice predicted = char_to_choice(pair.first[N - 1]);
-            move_count[predicted] += pair.second;
+            move_count[predicted] = pair.second;
         }
     }
 
@@ -43,12 +43,13 @@ Choice SmartComputerPlayer::predict_next_move() {
 
 string SmartComputerPlayer::history_to_string(int length) {
     stringstream ss;
-    int count = 0;
-    for (Choice c: last_n_choices) {
-        if (count++ == length) 
-            break;
-        ss << choice_to_char(c);
+    int size = last_n_choices.size();
+    int start = size - length;
+
+    for (int i = start; i < size; ++i) {
+        ss << choice_to_char(last_n_choices[i]);
     }
+    
     return ss.str();
 }
 
@@ -91,8 +92,6 @@ void SmartComputerPlayer::load_frequencies() {
     while (file >> seq >> freq) {
         sequence_frequencies[seq] = freq;
     }
-
-    cout << "Reading frequency file freq.txt: " << sequence_frequencies.size() << " records." << endl;
 }
 
 void SmartComputerPlayer::save_frequencies() {
@@ -103,8 +102,6 @@ void SmartComputerPlayer::save_frequencies() {
     for (auto& pair : sequence_frequencies) {
         file << pair.first << " " << pair.second << "\n";
     }
-
-    cout << "Writing frequency file freq.txt: " << sequence_frequencies.size() << " records." << endl;
 }
 
 void SmartComputerPlayer::record_move(Choice choice) {

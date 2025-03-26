@@ -27,6 +27,7 @@ public:
     vector<string> play_round(string human_choice_string);
     void select_computer_player(string algo_type);
     vector<int> get_stats();
+    void save_frequencies();
     ~GameEngine();
 };
 

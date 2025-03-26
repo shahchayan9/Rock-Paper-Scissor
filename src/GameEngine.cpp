@@ -34,6 +34,7 @@ string GameEngine::choice_to_string(Choice choice) {
 
 void GameEngine::select_computer_player(string algo_type) {
     this->computer = factory.select_computer_player(algo_type);
+    computer->load_frequencies();
 }
 
 vector<string> GameEngine::play_round(string human_choice_string) {
@@ -71,7 +72,6 @@ vector<int> GameEngine::get_stats() {
     return stats;
 }
 
-GameEngine::~GameEngine() {
+void GameEngine::save_frequencies() {
     computer->save_frequencies();
-    delete computer;
 }

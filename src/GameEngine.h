@@ -1,7 +1,6 @@
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
-#include "HumanPlayer.h"
 #include "ComputerPlayer.h"
 #include "RandomComputerPlayer.h"
 #include "SmartComputerPlayer.h"
@@ -17,8 +16,8 @@ private:
     int human_wins;
     int computer_wins;
     int ties;
-    Player *human;
     ComputerPlayer *computer;
+    Choice get_prediction(Choice computer_choice);
     Choice string_to_choice(string choice);
     string choice_to_string(Choice choice);
     

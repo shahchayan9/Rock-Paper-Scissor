@@ -6,7 +6,6 @@
 using namespace std;
 
 GameEngine::GameEngine() {
-    this->human = new HumanPlayer();
     this->computer = factory.select_computer_player("RANDOM");
     human_wins = computer_wins = ties = 0;
     computer->load_frequencies();
@@ -40,6 +39,7 @@ void GameEngine::select_computer_player(string algo_type) {
 vector<string> GameEngine::play_round(string human_choice_string) {
     Choice human_choice = string_to_choice(human_choice_string);
     Choice computer_choice = computer->choose();
+    Choice predicted_choice = get_prediction(computer_choice);
     string winner;
 
     if (human_choice == computer_choice) {
@@ -60,8 +60,16 @@ vector<string> GameEngine::play_round(string human_choice_string) {
     vector<string> result;
     result.push_back(winner);
     result.push_back(choice_to_string(computer_choice));
-
+    result.push_back(choice_to_string(predicted_choice));
     return result;
+}
+
+Choice GameEngine::get_prediction(Choice computer_choice) {
+    if (computer_choice == ROCK)
+        return SCISSORS;
+    else if (computer_choice == PAPER)
+        return ROCK;
+    return PAPER;
 }
 
 vector<int> GameEngine::get_stats() {
